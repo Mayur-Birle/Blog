@@ -1,0 +1,19 @@
+{% extends 'Home/base.html' %}
+{%block side%}
+				<h2 class="text-center text-light"> Login </h2>
+			<form action="login" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+  					<label for="usr">Email:</label>
+					<input type="email" name="email" class="form-control" id="usr" required>
+				</div>
+				<div class="form-group">
+  					<label for="pwd">Password:</label>
+  					<input type="password"  name="pass" class="form-control" id="pwd" required>
+				</div>
+				<div class="form-group text-center">
+					<button type="submit" class="from-control btn btn-primary" name="">Submit</button>
+				</div>	
+			</form>	
+			<div class="text-light">Or <a class="font-weight-bold text-light " href="{% url 'Reg' %}">Sign Up</a></div>	
+{%endblock%}
