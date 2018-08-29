@@ -1,0 +1,40 @@
+{%include 'Home/header.html'%}
+
+<div class="container-fluid h-100 d-flex flex-column">
+	<div class="row justify-content-center flex-grow-1">
+		<div class="col-sm-9 single-blog h-100">
+			<br/>
+
+			<h2 class="text-center"> Latest Blogs </h2>
+
+			<br/>
+
+			{% load humanize %}
+
+			{% for post in Post%}
+
+			<div class="card">
+  				  <div class="card-body">
+  				  	<h4 class="card-title">{{post.title}}</h4>
+  				  	<p class="card-text">{{post.short}}.......
+     						<a href="{% url 'SingleBlog' post.author.id post.id %}" class="card-link">Read Full Article</a>
+  				  	</p>
+      				By <a href="{% url 'PublicBlog' post.author.id %}" class="card-link">{{post.author}}</a>
+     				<p class="to-right">{{post.published_date|naturaltime}}</p>
+     			  </div> 
+			</div>
+
+			<br />
+
+			{%endfor%}
+
+
+		</div>
+
+		<div class="col-sm-3 bg-secondary flex-grow-1 ">
+				{% include 'Home/sidenav.html'%}
+		</div>
+	</div>
+</div>
+
+{%include 'Home/footer.html'%}

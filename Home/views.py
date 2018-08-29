@@ -2,23 +2,23 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 from django.urls import reverse
-from .models import Users
-# from .form import SignUpForm
+from .models import Users, Posts
+from django.utils import timezone;
 
-from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
 
-# Create your views here.
+
 def index(request):
-	if 'session_id' not in request.session:
-		return render(request,'Home/index1.html',{});
-	else:
-		user_id = request.session['session_id'];
-		user = Users.objects.get(id=user_id);
-		return render(request,'Home/index2.html',{'User':user})
+	user = check_session(request.session);
+	Post = Posts.objects.order_by('-published_date');
+	context = {
+		'User':user,
+		'Post':Post,
+		'Title': 'Blog Writer',
+	}
+	return render(request,'Home/home.html',{'User':user,'Post':Post})
 
-def reg_form(request):
-	return render(request,'Form/signup.html',{});
+# def reg_form(request):
+# 	return render(request,'Form/signup.html',{});
 
 class SignUp(View):
 	def get(self,request):
@@ -48,12 +48,55 @@ class LogIn(View):
 				return HttpResponseRedirect(reverse('Home'))
 		return HttpResponse('You Enter Wrong Email or Password');
 
+class CreateNew(View):
+	def get(self,request):
+		if 'session_id' in request.session:
+			user = check_session(request.session);
+			return render(request,'Home/create_new.html',{'User':user});
+		else:
+			HttpResponseRedirect(reverse("Home"));
+	def post(self,request):
+		if 'session_id' in request.session:
+			user = check_session(request.session);
+			post = Posts();
+			post.author = user;
+			post.title = request.POST['title'];
+			post.text = request.POST['content'];
+			post.published_date = timezone.now();
+			post.save();
+			return HttpResponseRedirect(reverse('PublicBlog',kwargs={'author_id':user.id}));
+
+		else:
+			HttpResponseRedirect(reverse("Home"));
+
+
 def logout(request):
     try:
-        del request.session['session_id']
+        request.session.flush();
     except KeyError:
-        pass
+        return HttpResponse('Error Occur While Logging You Out, Please Try Again')
     return HttpResponseRedirect(reverse('Home'))
+
+def public_blog_view(request,author_id):
+	a = Users.objects.get(id=author_id);
+	p = Posts.objects.filter(author = a);
+	u = check_session(request.session);
+	context = {'Author':a,'Post':p,'User':u};
+	return render(request,'Home/user_post.html',context);
+
+def single_blog_view(request,author_id,post_id):
+	a = Users.objects.get(id=author_id);
+	p = Posts.objects.get(id=post_id);
+	u = check_session(request.session);
+	context = {'Author':a,'Post':p,'User':u};
+	return render(request,'Home/single_post.html',context);
+
+#Some General Function	
+
+def check_session(sessions):
+	if 'session_id' in sessions:
+		return Users.objects.get(id=sessions['session_id']);
+	return False;
 
 def is_mail_exist(mail):
 	mail_list = Users.objects.values('user_email')

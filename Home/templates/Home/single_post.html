@@ -1,0 +1,17 @@
+{%include 'Home/header.html'%}
+
+<div class="container-fluid h-100 d-flex flex-column">
+	<div class="row justify-content-center flex-grow-1">
+		<div class="col-sm-9 single-blog h-100">
+
+			<h2 class="text-left">{{Post.title}}</h2>
+			<div class="paragraph">{{Post.text}}</div>
+
+		</div>
+		<div class="col-sm-3 bg-secondary flex-grow-1 ">
+				{% include 'Home/sidenav.html'%}
+		</div>
+	</div>	
+</div>
+
+{%include 'Home/footer.html'%}

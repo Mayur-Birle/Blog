@@ -1,3 +1,4 @@
+{% load humanize %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,7 +87,10 @@
     		  <a class="nav-link text-light" href="#">About</a>
     		</li>
    			<li class="nav-item">
-    		  <a class="nav-link text-light" href="#">ALL</a>
+    		  <a class="nav-link text-light" href="#">Contact</a>
+    		</li>
+   			<li class="nav-item">
+    		  <a class="nav-link text-light" href="#">Help</a>
     		</li>
   		</ul>
   		<form class="form-inline my-2 my-lg-0 to-right">
@@ -98,37 +102,31 @@
   <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-9 bg-light">
-			<h2 class="text-center"> Trending Blogs </h2>
+			<h2 class="text-center"> Latest Blogs </h2>
+
+			{% for post in Post%}
 
 			<div class="card">
   				  <div class="card-body">
-  				  	<h4 class="card-title">Blog 1</h4>
-  				  	<p class="card-text">Some example text. Some example text.</p>
-      				<a href="#" class="card-link">Auther</a>
-     				<a href="#" class="card-link">Read...</a>
+  				  	<h4 class="card-title">{{post.title}}</h4>
+  				  	<p class="card-text">{{post.short}}.......
+     						<a href="#" class="card-link">Read Full Article</a>
+  				  	</p>
+      				By <a href="{% url 'PublicBlog' post.author.id %}" class="card-link">{{post.author}}</a>
+     				<p class="to-right">{{post.published_date|naturaltime}}</p>
      			  </div> 
 			</div>
-			<div class="card">
-  				  <div class="card-body">
-  				  	<h4 class="card-title">Blog 2</h4>
-  				  	<p class="card-text">Some example text. Some example text.</p>
-      				<a href="#" class="card-link">Auther</a>
-     				<a href="#" class="card-link">Read...</a>
-     			  </div> 
-			</div>
-			<div class="card">
-  				  <div class="card-body">
-  				  	<h4 class="card-title">Blog 3</h4>
-  				  	<p class="card-text">Some example text. Some example text.</p>
-      				<a href="#" class="card-link">Auther</a>
-     				<a href="#" class="card-link">Read...</a>
-     			  </div> 
-			</div>
+
+			<br />
+
+			{%endfor%}
+
 
 		</div>
 
 		<div class="col-sm-3 bg-secondary">
-				{% block side %}{% endblock %}	
+				<!-- {% block side %}{% endblock %}	 -->
+				{% include 'Home/index.html'%}
 		</div>
 	</div>
   </div>	

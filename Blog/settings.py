@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'Home',
+    'Home',     # Added by Me
+    'django.contrib.humanize', # Added by Me
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,10 +78,10 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'Database1',
+        'USER': 'cymb',
+        'PASSWORD': 'root1234',
+        'HOST': 'cymb.mysql.pythonanywhere-services.com',#'localhost',
         'PORT': ''
     }
 }

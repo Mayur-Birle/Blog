@@ -1,0 +1,25 @@
+{%include 'Home/header.html'%}
+
+<div class="container-fluid h-100 d-flex flex-column">
+	<div class="row justify-content-center flex-grow-1">
+		<div class="col-sm-9 single-blog h-100">
+
+	<form action="{%url 'CreateNew'%}" method="post">
+		{% csrf_token %}
+
+
+			<h2 class="text-left"><textarea name="title" autocomplete="off" placeholder="Post Title" id="title_text"></textarea></h2>
+			<div class="paragraph"><textarea name="content" autocomplete="off" placeholder="Start writing from here...." id="content_text"></textarea></div>
+	<button type="submit" class="btn btn-success t-right"> Save & Publish</button>
+	<a href="{% url 'Home' %}"><button class="btn btn-danger t-right"> Go Back</button>	
+
+	</form>	
+
+		</div>
+		<div class="col-sm-3 bg-secondary flex-grow-1 ">
+				{% include 'Home/sidenav.html'%}
+		</div>
+	</div>	
+</div>
+
+{%include 'Home/footer.html'%}

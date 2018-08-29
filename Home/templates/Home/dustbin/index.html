@@ -1,0 +1,36 @@
+{% if User != False%}
+			<p class="text-center font2 text-light my-auto">Welcome</p>
+			<h3 class="text-center text-light font2">{{User.user_name}}</h3>
+
+			<div class="container-fluid text-center" style="margin-top:15%">
+
+			    <div class="list-group">
+			    	<a href="{% url 'PublicBlog' User.id %}" class="list-group-item list-group-item-action list-group-item-dark">Your Blog's</a>
+			    	<a href="{%url 'CreateNew'%}" class="list-group-item list-group-item-action list-group-item-dark">Write A Post</a>
+			    	<a href="#" class="list-group-item list-group-item-action list-group-item-dark">Manage Your Post</a>
+			    	<a href="#" class="list-group-item list-group-item-action list-group-item-dark">Saved Post</a>
+			    	<a href="#" class="list-group-item list-group-item-action list-group-item-dark">Settings</a>
+			    </div>		
+			<br />
+			<a href="{% url 'LogOut' %}"><button class="btn btn-danger my-auto to-left">Logout</button></a>
+
+			</div>
+{%else%}
+			<h2 class="text-center text-light"> Login </h2>
+			<form action="login" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+  					<label for="usr">Email:</label>
+					<input type="email" name="email" class="form-control" id="usr" required>
+				</div>
+				<div class="form-group">
+  					<label for="pwd">Password:</label>
+  					<input type="password"  name="pass" class="form-control" id="pwd" required>
+				</div>
+				<div class="form-group text-center">
+					<button type="submit" class="from-control btn btn-primary" name="">Submit</button>
+				</div>	
+			</form>	
+			<div class="text-light">Or <a class="font-weight-bold text-light " href="{% url 'Reg' %}">Sign Up</a></div>	
+{% endif%}
+
