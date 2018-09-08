@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Database1',
-        'USER': 'cymb',
-        'PASSWORD': 'root1234',
-        'HOST': 'cymb.mysql.pythonanywhere-services.com',#'localhost',
+        'NAME': 'Blog',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',#cymb.mysql.pythonanywhere-services.com'
         'PORT': ''
     }
 }

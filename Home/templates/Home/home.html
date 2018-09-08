@@ -11,15 +11,26 @@
 
 			{% load humanize %}
 
+
+
 			{% for post in Post%}
 
 			<div class="card">
   				  <div class="card-body">
-  				  	<h4 class="card-title">{{post.title}}</h4>
-  				  	<p class="card-text">{{post.short}}.......
+  				  	<h4 class="card-title to-left">{{post.title}}</h4>
+  				  	<div class="to-right">
+  				  	{% if post.id in List %}
+      					<i class="fas fa-heart like" data-post="{{post.id}}"></i>
+      				{%else%}
+      					<i class="far fa-heart like" data-user="{{User.id}}" data-post="{{post.id}}"></i>
+      				{%endif%}
+      					<span style="margin-right: 5px; margin-left: 5px; font-weight: 600;" class="count_like" data-count="{{post.id}}">{{post.count_like}}</span>
+      				</div>
+  				  	<p class="card-text to-left">{{post.short}}.......
      						<a href="{% url 'SingleBlog' post.author.id post.id %}" class="card-link">Read Full Article</a>
   				  	</p>
-      				By <a href="{% url 'PublicBlog' post.author.id %}" class="card-link">{{post.author}}</a>
+  				  	<br/>
+      				By <a href="{% url 'PublicBlog' post.author.id %}" class="card-link ">{{post.author}}</a>
      				<p class="to-right">{{post.published_date|naturaltime}}</p>
      			  </div> 
 			</div>

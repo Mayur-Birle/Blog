@@ -6,10 +6,10 @@
 			<div class="container-fluid text-center" style="margin-top:15%">
 
 			    <div class="list-group">
-			    	<a href="{% url 'PublicBlog' User.id %}" class="list-group-item list-group-item-action list-group-item-dark">My Blogs</a>
+			    	<a href="{%url 'PublicBlog' User.id %}" class="list-group-item list-group-item-action list-group-item-dark">My Blogs</a>
 			    	<a href="{%url 'CreateNew'%}" class="list-group-item list-group-item-action list-group-item-dark">Write A Post</a>
-			    	<a href="#" class="list-group-item list-group-item-action list-group-item-dark">Manage Your Post</a>
-			    	<a href="#" class="list-group-item list-group-item-action list-group-item-dark">Saved Post</a>
+			    	<a href="{%url 'Manage'%}" class="list-group-item list-group-item-action list-group-item-dark">Manage Your Post</a>
+			    	<a href="{%url 'LikeBlog' User.id %}" class="list-group-item list-group-item-action list-group-item-dark">Liked Post</a>
 			    	<a href="#" class="list-group-item list-group-item-action list-group-item-dark">Settings</a>
 			    </div>		
 			<br />
@@ -18,7 +18,7 @@
 			</div>
 {%else%}
 			<h2 class="text-center text-light"> Login </h2>
-			<form action="{%url 'LogIn' %}" method="post">
+			<form action="{%url 'LogIn' %}" method="post" id="login_form">
 				{% csrf_token %}
 				<div class="form-group">
   					<label for="usr">Email:</label>

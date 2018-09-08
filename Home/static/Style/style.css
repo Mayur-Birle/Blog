@@ -120,3 +120,50 @@
 		font-weight:100;
 		color:#333;
 }
+
+	.single-blog .paragraph b{
+		font-weight:700;		
+	}
+
+	.single-blog .paragraph big{
+		font-size: 35px;
+	}
+
+	.single-blog .paragraph i{
+		font-style: italic;
+	}
+
+
+	.single-blog .paragraph u{
+		font-style: underline;
+	}
+
+	.error{
+		color: red;
+   		font-size: 15px;
+    	font-family: serif;
+    	font-style: oblique;
+    	font-weight: 500;
+	}
+
+	.like{
+		cursor: pointer;
+	}
+
+	 .fas .fa-heart i , .fas .fa-heart svg{
+		color: red !important;
+		fill: currentColor;
+	}
+
+	@media (max-width: 500px){
+		#header h1{
+			margin: 0 auto;
+			text-align: center;
+			float: none;
+		}
+		#moto{
+			display: none;
+		}
+	}
+
+	
